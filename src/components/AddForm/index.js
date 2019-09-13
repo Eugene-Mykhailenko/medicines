@@ -52,6 +52,11 @@ class AddForm extends Component {
         const value = e.target.value;
         const name = e.target.name;
 
+        if(name === 'shelfLife' || name === 'price') {
+            const numReg = new RegExp('^[0-9]*$');
+            if(!numReg.test(value)) return
+        }
+
         this.props.dispatch(setValue(name, value));
     };
 

@@ -66,23 +66,30 @@ export const addFormReducer = (state = initialState, action) => {
             const name = action.payload.name;
             const value = action.payload.value;
 
-            let codeRe = value.length >= 5 && value.length <= 10;
-            let nameRe = value.length >= 5 && value.length <= 100;
-            let priceRe = value.length > 0 && Number(value) >= 0.01 && Number(value) <= 1000000;
-            let shelfLifeRe = value.length > 0 && Number(value) >= 0 && Number(value) <= 1000;
-            let lastFieldsRe = value.length >= 0 && value.length <= 2000;
-
             return {
                 ...state,
-                isValidCode: name === 'code' ? codeRe :  state.isValidCode,
-                isValidName: name === 'name' ? nameRe : state.isValidName,
-                isValidPrice: name === 'price' ? priceRe :  state.isValidPrice,
-                isValidShelfLife: name === 'shelfLife' ? shelfLifeRe :  state.isValidShelfLife,
-                isValidCompositionAndFormOfRelease: name === 'compositionAndFormOfRelease' ? lastFieldsRe :  state.isValidCompositionAndFormOfRelease,
-                isValidIndication: name === 'indication' ? lastFieldsRe :  state.isValidIndication,
-                isValidContraIndications: name === 'contraIndications' ? lastFieldsRe :  state.isValidContraIndications,
+                isValidCode: name === 'code'
+                    ? value.length >= 5 && value.length <= 10
+                    : state.isValidCode,
+                isValidName: name === 'name'
+                    ? value.length >= 5 && value.length <= 100
+                    : state.isValidName,
+                isValidPrice: name === 'price'
+                    ? value.length > 0 && Number(value) >= 0.01 && Number(value) <= 1000000
+                    : state.isValidPrice,
+                isValidShelfLife: name === 'shelfLife'
+                    ? value.length > 0 && Number(value) > 0 && Number(value) <= 1000
+                    : state.isValidShelfLife,
+                isValidCompositionAndFormOfRelease: name === 'compositionAndFormOfRelease'
+                    ? value.length >= 0 && value.length <= 2000
+                    : state.isValidCompositionAndFormOfRelease,
+                isValidIndication: name === 'indication'
+                    ? value.length >= 0 && value.length <= 2000
+                    : state.isValidIndication,
+                isValidContraIndications: name === 'contraIndications'
+                    ? value.length >= 0 && value.length <= 2000
+                    : state.isValidContraIndications,
                 [action.payload.name]: action.payload.value,
-
             };
         }
 
