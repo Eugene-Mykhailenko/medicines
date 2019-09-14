@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { collection } from "../../firebase";
 import MedicinesListItem from "../MedicinesListItem";
-import {collection} from "../../firebase";
 
 import {openModal} from "../../bus/AddForm/actions";
 
