@@ -35,20 +35,24 @@ class MedicinesList extends Component {
     render() {
         return (
             <React.Fragment>
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Code</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.medicines.map(item => <MedicinesListItem key={item.id} data={item}/>)}
-                    </tbody>
-                </table>
-                <button className="btn btn-primary float-right" onClick={this._openAddModal}>+</button>
+                <div className="row">
+                    <table className="table table-sm table-striped table-dark ">
+                        <thead>
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.state.medicines.map(item => <MedicinesListItem key={item.id} data={item}/>)}
+                        </tbody>
+                    </table>
+                </div>
+                <button className="btn btn-primary float-right" onClick={this._openAddModal}>
+                    <i className="fa fa-plus"/>
+                </button>
             </React.Fragment>
         )
     }

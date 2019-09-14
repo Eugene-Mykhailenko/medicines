@@ -52,9 +52,14 @@ class AddForm extends Component {
         const value = e.target.value;
         const name = e.target.name;
 
-        if(name === 'shelfLife' || name === 'price') {
+        if (name === 'price') {
+            const numReg = new RegExp('^([0-9]+([.][0-9]*)?|[.][0-9]+)$');
+            if (!numReg.test(value)) return;
+        }
+
+        if (name === 'shelfLife') {
             const numReg = new RegExp('^[0-9]*$');
-            if(!numReg.test(value)) return
+            if (!numReg.test(value)) return
         }
 
         this.props.dispatch(setValue(name, value));
@@ -160,121 +165,134 @@ class AddForm extends Component {
 
         return (
             <React.Fragment>
-                <h5 style={{'textAlign': 'center'}}>
+                <h5 className="mb-4" style={{'textAlign': 'center'}}>
                     {edit ? 'Edit medicine' : 'Add'}{` ${step}/2`}
                 </h5>
-                <table className="table table-borderless">
+                <React.Fragment>
                     {step === 1
-                        ? <tbody>
-                        <tr>
-                            <th scope="row">Code</th>
-                            <td>
-                                <input type="text"
-                                       name="code"
-                                       value={code}
-                                       onChange={this._handleValue}
-                                />
-                                {!isValidCode &&
-                                <div className="text-danger small">введите от 5 до 10 символов</div>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Name</th>
-                            <td>
-                                <input type="text"
-                                       name="name"
-                                       value={name}
-                                       onChange={this._handleValue}
-                                />
-                                {!isValidName &&
-                                <div className="text-danger small">введите от 5 до 100 символов</div>}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Price</th>
-                            <td>
-                                <input type="text"
-                                       name="price"
-                                       value={price}
-                                       onChange={this._handleValue}
-                                />
-                                {!isValidPrice &&
-                                <div className="text-danger small">число в диапазоне от 0.01 до 1 000 000</div>
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Expiration date</th>
-                            <td>
-                                <input type="text"
-                                       name="shelfLife"
-                                       value={shelfLife}
-                                       onChange={this._handleValue}
-                                />
-                                {!isValidShelfLife &&
-                                <div className="text-danger small">число от 1 до 1000</div>
-                                }
-                            </td>
-                        </tr>
-                        </tbody>
-                        : <tbody>
-                        <tr>
-                            <th scope="row">Composition and releases form</th>
-                            <td>
-                            <textarea name="compositionAndFormOfRelease"
-                                      value={compositionAndFormOfRelease}
-                                      onChange={this._handleValue}
-                                      cols="30" rows="5"
-                            />
-                                {!isValidCompositionAndFormOfRelease &&
-                                <div className="text-danger small">строка от 0 до 2000 символов</div>
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Indication</th>
-                            <td>
-                            <textarea name="indication"
-                                      value={indication}
-                                      onChange={this._handleValue}
-                                      cols="30"
-                                      rows="5"
-                            />
-                                {!isValidIndication &&
-                                <div className="text-danger small">строка от 0 до 2000 символов</div>
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Contraindications</th>
-                            <td>
-                            <textarea name="contraIndications"
-                                      value={contraIndications}
-                                      onChange={this._handleValue}
-                                      cols="30"
-                                      rows="5"
-                            />
-                                {!isValidContraIndications &&
-                                <div className="text-danger small">строка от 0 до 2000 символов</div>
-                                }
-                            </td>
-                        </tr>
-                        </tbody>
+                        ? <React.Fragment>
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Code</label>
+                                <div className="col-sm-10">
+                                    <input type="text"
+                                           className="form-control form-control-sm"
+                                           name="code"
+                                           value={code}
+                                           onChange={this._handleValue}
+                                    />
+                                    {!isValidCode &&
+                                    <div className="text-danger small">введите от 5 до 10 символов</div>}
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Name</label>
+                                <div className="col-sm-10">
+                                    <input type="text"
+                                           className="form-control form-control-sm"
+                                           name="name"
+                                           value={name}
+                                           onChange={this._handleValue}
+                                    />
+                                    {!isValidName &&
+                                    <div className="text-danger small">введите от 5 до 100 символов</div>}
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Price</label>
+                                <div className="col-sm-10">
+                                    <input type="text"
+                                           className="form-control form-control-sm"
+                                           name="price"
+                                           value={price}
+                                           onChange={this._handleValue}
+                                    />
+                                    {!isValidPrice &&
+                                    <div className="text-danger small">число в диапазоне от 0.01 до 1 000 000</div>}
+                                </div>
+                            </div>
+
+                            <div className="form-group row">
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Expiration date</label>
+                                <div className="col-sm-10">
+                                    <input type="text"
+                                           className="form-control form-control-sm"
+                                           name="shelfLife"
+                                           value={shelfLife}
+                                           onChange={this._handleValue}
+                                    />
+                                    {!isValidShelfLife && <div className="text-danger small">число от 1 до 1000</div>}
+                                </div>
+                            </div>
+                        </React.Fragment>
+                        : <React.Fragment>
+                            <div className="form-group row">
+                                <label className="col-sm-3 col-form-label col-form-label-sm">
+                                    Composition and releases form
+                                </label>
+                                <div className="col-sm-9">
+                                    <textarea className="form-control form-control-sm"
+                                              name="compositionAndFormOfRelease"
+                                              value={compositionAndFormOfRelease}
+                                              onChange={this._handleValue}
+                                              cols="30" rows="5"
+                                    />
+                                    {!isValidCompositionAndFormOfRelease &&
+                                        <div className="text-danger small">строка от 0 до 2000 символов</div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-sm-3 col-form-label col-form-label-sm">
+                                    Indication
+                                </label>
+                                <div className="col-sm-9">
+                                    <textarea className="form-control form-control-sm"
+                                              name="indication"
+                                              value={indication}
+                                              onChange={this._handleValue}
+                                              cols="30"
+                                              rows="5"
+                                    />
+                                    {!isValidIndication &&
+                                        <div className="text-danger small">строка от 0 до 2000 символов</div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-sm-3 col-form-label col-form-label-sm">
+                                    Contraindications
+                                </label>
+                                <div className="col-sm-9">
+                                    <textarea className="form-control form-control-sm"
+                                              name="contraIndications"
+                                              value={contraIndications}
+                                              onChange={this._handleValue}
+                                              cols="30"
+                                              rows="5"
+                                    />
+                                    {!isValidContraIndications &&
+                                        <div className="text-danger small">строка от 0 до 2000 символов</div>
+                                    }
+                                </div>
+                            </div>
+                        </React.Fragment>
                     }
-                </table>
+                </React.Fragment>
                 <button className="btn btn-outline-secondary btn-sm mr-2" onClick={this._closeModal}>Cancel
                 </button>
                 {step === 1
                     ? <button className="btn btn-outline-primary btn-sm mr-2"
-                            onClick={this._handleNextStep}>Next</button>
+                              onClick={this._handleNextStep}>Next</button>
                     : <button className="btn btn-outline-primary btn-sm mr-2"
-                            onClick={this._handlePrevStep}>Prev</button>
+                              onClick={this._handlePrevStep}>Prev</button>
                 }
                 {step === 2 && !edit &&
-                    <button className="btn btn-outline-success btn-sm" onClick={this._addItem}>Create</button>
+                <button className="btn btn-outline-success btn-sm" onClick={this._addItem}>Create</button>
                 }
                 {step === 2 && edit &&
-                    <button className="btn btn-outline-success btn-sm" onClick={this._editItem}>Edit</button>
+                <button className="btn btn-outline-success btn-sm" onClick={this._editItem}>Edit</button>
                 }
             </React.Fragment>
         )

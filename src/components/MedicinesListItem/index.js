@@ -20,15 +20,15 @@ function MedicinesListItem(props){
             <td>{data.name}</td>
             <td>{data.price}</td>
             <td style={{'textAlign': 'right'}}>
-                <button className="btn btn-outline-primary btn-sm mr-2"
+                <button className="btn btn-outline-primary btn-sm m-1"
                         onClick={editModal.bind(null, data.id)}
                 >
-                    Edit
+                    <i className="fa fa-edit"/>
                 </button>
-                <button className="btn btn-outline-danger btn-sm"
+                <button className="btn btn-outline-danger btn-sm m-1"
                         onClick={deleteItem.bind(null, data.id)}
                 >
-                    Delete
+                    <i className="fa fa-trash-alt"/>
                 </button>
             </td>
         </tr>
